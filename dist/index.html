@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css?_v=20220620221145">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220620221145">
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css?_v=20220620222952">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220620222952">
 	<title>Главная</title>
 </head>
 
@@ -69,7 +69,7 @@
 			if (e.key === 'Enter') {
 				let tag = e.target.value.replace(/\s+/g, ''); //removing unwanted spaces from user
 				if (tag.length > 1 && !tags.includes(tag)) {// if tag length is greater than 1 the tag isn't exist
-					if(tags,length < maxTags){
+					if(tags.length < maxTags){
 						tag.split(',').forEach(tag => { //splitting each tag from comma
 						tags.push(tag); //adding each tag inside array
 						createTag();

@@ -64,7 +64,7 @@
 			if (e.key === 'Enter') {
 				let tag = e.target.value.replace(/\s+/g, ''); //removing unwanted spaces from user
 				if (tag.length > 1 && !tags.includes(tag)) {// if tag length is greater than 1 the tag isn't exist
-					if(tags,length < maxTags){
+					if(tags.length < maxTags){
 						tag.split(',').forEach(tag => { //splitting each tag from comma
 						tags.push(tag); //adding each tag inside array
 						createTag();
