@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+@@include('html/head.html',{
+"title":"Главная"
+})
+
+<body>
+	<div class="wrapper">
+		<!-- @@include('html/header.html',{}) -->
+		<main>
+			<section class="tagbox">
+				<div class="container">
+					<div class="tagbox__title flex">
+						<img src="@img/tag.svg" alt="icon">
+						<h2>Tags</h2>
+					</div>
+					<div class="tagbox__content">
+						<p class="tagbox__description">Press enter or add a comma after each tag</p>
+						<ul class="tagbox__list">
+							<input class="tagbox__input" type="text" spellcheck="false">
+						</ul>
+					</div>
+					<div class="tagbox__details flex">
+						<p><span>10</span> tags are remaining</p>
+						<button>Remove All</button>
+					</div>
+			</section>
+
+		</main>
+		<!-- @@include('html/footer.html',{}) -->
+	</div>
+	<script>
+		const tagboxList = document.querySelector('.tagbox__list');
+		const tagboxInput = tagboxList.querySelector('.tagbox__input');
+		const counter = document.querySelector('.tagbox__details span');
+		const removeBtn = document.querySelector('.tagbox__details button');
+		let maxTags = 10;
+		let tags = [];
+
+		tagboxInput.focus()
+		function countTags() {
+			counter.innerHTML = maxTags - tags.length;
+		};
+
+
+		function createTag() {
+			//removing all li before adding so there will not be duplicate tags
+			tagboxList.querySelectorAll('li').forEach(li => li.remove());
+
+			tags.slice().reverse().forEach(tag => {
+				let liTag = `<li class="tagbox__listItem">${tag}<i class="uit uit-multiply" onclick="remove(this, '${tag}')"></i></li>`;
+				tagboxList.insertAdjacentHTML('afterbegin', liTag); //adding li inside ul
+			});
+			countTags();
+		}
+
+		function remove(element, tag) {
+			let index = tags.indexOf(tag)//removing tag index
+			tags = [...tags.slice(0, index), ...tags.slice(index + 1)];//removing or excluted selected tag from array
+			element.parentElement.remove()// removing li of removed tag
+			countTags();
+		}
+		function addTag(e) {
+			if (e.key === 'Enter') {
+				let tag = e.target.value.replace(/\s+/g, ''); //removing unwanted spaces from user
+				if (tag.length > 1 && !tags.includes(tag)) {// if tag length is greater than 1 the tag isn't exist
+					if(tags,length < maxTags){
+						tag.split(',').forEach(tag => { //splitting each tag from comma
+						tags.push(tag); //adding each tag inside array
+						createTag();
+					});
+				}
+					}
+				
+				e.target.value = '';
+			}
+
+
+		}
+		tagboxInput.addEventListener('keyup', addTag);
+    removeBtn.addEventListener('click',()=>{
+		tags.length = 0;
+		tagboxList.querySelectorAll('li').forEach(li => li.remove());
+		countTags();
+	})
+
+	</script>
+</body>
+
+</html>
